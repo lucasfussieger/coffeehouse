@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Produtos</title>
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% include 'partials/header.html' %}
+   
+    <main>
+        <div class="flashes">
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                            {{ message }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+         </div>
+        <div class="store">
+            {% for p in produtos %}
+                <a href="{% url 'product_details' p.id %}" class="product">
+                    {{ p.nome }} - R$ {{ p.preco }}
+                </a>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
