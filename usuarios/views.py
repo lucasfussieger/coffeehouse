@@ -31,8 +31,8 @@ def entrar(request):
     if request.method == 'POST':
         email = request.POST['email']
         senha = request.POST['senha']
-        user = authenticate(request, email=email, password=senha)
-        if user:
+        user = authenticate(request, username=email, password=senha)
+        if user is not None:
             login(request, user)
             return redirect('store')
         else:
@@ -106,7 +106,7 @@ def edit_user(request):
         messages.success(request, 'nome de usuário editado com sucesso!')
         return redirect('store')
 
-    return render(request, 'edit_user.html')
+    return render(request, 'edit_user.html', {'usuario': request.user})
 
 @login_required
 def lista_clientes(request):

@@ -16,12 +16,14 @@
         <p>Preço: {{ item.product.price }}</p>
 
         <form method="POST">
+            {% csrf_token %}
             <label>Quantidade:</label>
             <input type="number" name="quantity" value="{{ item.quantity }}">
             <button type="submit">Atualizar Quantidade</button>
         </form>
 
         <form method="POST">
+            {% csrf_token %}
             <input type="hidden" name="delete" value="1">
             <button type="submit">Remover do Carrinho</button>
         </form>

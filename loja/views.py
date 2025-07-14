@@ -183,4 +183,8 @@ def finalizar_carrinho(request):
     messages.success(request, 'Pedido realizado com sucesso!')
     return redirect('store')
 
-    
+@login_required
+def order_list(request):
+    if request.user.user_type == 'vendedor':
+        lista = Order.objects.all()
+        return render(request, 'lista_pedidos.html', {'order': lista})

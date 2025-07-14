@@ -15,7 +15,7 @@ urlpatterns = [
     path('cadastrar/', views.cadastrar, name = 'cadastrar'),
     path('profile_page/', views.profile_page , name = 'profile_page'),
     path('delete_user/', views.deletar_conta , name = 'delete_user'),
-    path('edit_user/<int:cliente_id>', views.edit_user , name = 'edit_user'),
-    path('cliente_list/', views.lista_clientes , name = 'cliente_list'),
-    path('cliente_details/<int:cliente_id>', views.cliente_details, name = 'cliente_details')
+    path('edit_user/', views.edit_user , name = 'edit_user'),
+    path('cliente_list/', views.lista_clientes, name = 'cliente_list'),
+    path('cliente_details/<int:cliente_id>', views.cliente_details, name = 'cliente_details'),
 ]

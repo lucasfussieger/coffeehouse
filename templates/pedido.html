@@ -21,7 +21,8 @@
     {% endfor %}
 
     {% if pedido.status != 'aprovado' %}
-        <form method="POST" action="{{ url_for('aprovar_pedido', pedido_id=pedido.id) }}">
+        <form method="POST" action="{% url 'aprovar_pedido' pedido.id %}">
+            {% csrf_token %}
             <button type="submit">Aprovar Pedido</button>
         </form>
     {% endif %}

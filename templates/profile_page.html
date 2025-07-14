@@ -15,8 +15,8 @@
     <main>
         <h1>{{usuario.nome}} - {{usuario.id}}</h1>
         <h1>{{usuario.email}}</h1>
-        <a href="{% url 'edit_user', cliente_id=usuario.id %}">editar nome de usuario</a>
-        <form action="{% url 'deletar_conta' %}" method="POST" onsubmit="return confirm('Tem certeza que quer apagar sua conta?')">
+        <a href="{% url 'edit_user' %}">editar nome de usuario</a>
+        <form action="{% url 'delete_user' %}" method="POST" onsubmit="return confirm('Tem certeza que quer apagar sua conta?')">
             {% csrf_token %}
             <button type="submit">Apagar Conta</button>
         </form>

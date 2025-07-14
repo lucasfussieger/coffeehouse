@@ -14,7 +14,7 @@
     <main>
         {% for pedido in pedidos %}
             <div>
-                <a href="{{ url_for('ver_pedido', pedido_id=pedido.id) }}" class="iten">
+                <a href="{% url 'ver_pedido' pedido.id %}" class="iten">
                     Usuário: {{pedido.user_id}} - Pedido #{{ pedido.id }} - Status: {{ pedido.status }}
                 </a>
             </div>

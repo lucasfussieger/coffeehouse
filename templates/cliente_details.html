@@ -16,7 +16,7 @@
         {{user.nome}}
         {{user.email}}
         {{user.id}}
-        <a href="{{url_for('lista_clientes')}}"> <button>editar informações de usuário</button></a>
+        <a href="{% url 'lista_clientes' %}"> <button>editar informações de usuário</button></a>
     </main>
 </body>
 </html>
