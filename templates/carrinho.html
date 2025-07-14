@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% include 'partials/header.html'%}
+     <div class="flashes">
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <main>
+        
+        {% for i in itens %}
+        
+           <p class="iten">
+                <img src="{% url 'static', filename='uploads/' ~ i.image %}" alt="Imagem do produto"> {{i.product_name}}-{{i.product_price}}-{{i.quantity}}
+           </p>  
+                
+        {% endfor %}
+        <form action="{% url 'finalizar_carrinho' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Finalizar Carrinho e Fazer Pedido</button>
+        </form>
+    </main>
+
+</body>
+</html>

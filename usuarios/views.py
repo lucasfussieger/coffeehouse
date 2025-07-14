@@ -5,6 +5,19 @@ from django.contrib import messages
 from .models import User  # seu modelo
 from django.contrib.auth.hashers import make_password
 
+#/product_details/<int:product_id>
+#/delete_product/<int:product_id>
+#/edit_product/<int:product_id>
+#/carrinho
+#/carrinho/item/<int:item_id>
+#/finalizar_carrinho
+#/pedidos
+#/pedido/<int:pedido_id>/aprovar
+#/store/produtos/<string:product_type>
+
+##
+
+
 def home(request):
     if request.user.is_authenticated:
         logout(request)
@@ -18,8 +31,8 @@ def entrar(request):
     if request.method == 'POST':
         email = request.POST['email']
         senha = request.POST['senha']
-        user = authenticate(request, email=email, password=senha)
-        if user:
+        user = authenticate(request, username=email, password=senha)
+        if user is not None:
             login(request, user)
             return redirect('store')
         else:
@@ -46,11 +59,18 @@ def cadastrar(request):
             messages.warning(request, 'as senhas não batem')
             return render(request, 'cadastro.html')
 
-        user = User(nome=nome, email=email, password=make_password(senha), user_type=user_type)
+        user = User(
+            username=email,       
+            email=email,
+            nome=nome,
+            user_type=user_type
+        )
+        user.set_password(senha)
         user.save()
         login(request, user)
+
         messages.success(request, f'bem vindo à CoffeHouse, {user.user_type} {user.nome}')
-        return redirect('store')
+        return render(request, 'store.html')
 
     return render(request, 'cadastro.html')
 
@@ -86,5 +106,20 @@ def edit_user(request):
         messages.success(request, 'nome de usuário editado com sucesso!')
         return redirect('store')
 
-    return render(request, 'edit_user.html')
+    return render(request, 'edit_user.html', {'usuario': request.user})
 
+@login_required
+def lista_clientes(request):
+    if request.user.user_type == 'vendedor':
+        lista = User.objects.filter(user_type='cliente')
+        return render(request, 'lista_cliente.html', {'user': lista, 'usuario': request.user})
+    else:
+        return HttpResponse('URL indisponível')
+
+@login_required
+def cliente_details(request, cliente_id):
+    usuario = get_object_or_404(User, id = cliente_id)
+    return render(request, 'cliente_details.html', {
+        'user': usuario,
+        'usuario': request.user
+    })
