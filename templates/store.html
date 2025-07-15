@@ -26,6 +26,7 @@
         <div class="store">
             {% for p in produtos %}
                 <a href="{% url 'product_details' p.id %}" class="product">
+                    <img src="{{ p.image.url}}" alt="imagem do produto"><br>
                     {{ p.nome }} - R$ {{ p.preco }}
                 </a>
             {% endfor %}

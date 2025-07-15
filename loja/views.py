@@ -5,7 +5,7 @@ from django.core.exceptions import PermissionDenied
 from .models import Product, Order, CartItem, OrderItem
 from django.core.files.storage import default_storage
 import uuid
-
+from django.utils import timezone
 @login_required
 def store(request):
     produtos = Product.objects.all()
