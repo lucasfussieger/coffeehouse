@@ -8,12 +8,14 @@ import uuid
 from django.utils import timezone
 @login_required
 def store(request):
-    produtos = Product.objects.all()
-    return render(request, 'store.html', {'produtos': produtos, 'usuario': request.user})
-
-@login_required
-def store_filter(request, product_type):
-    produtos = Product.objects.filter(product_type=product_type)
+    search = request.GET.get('search')
+    product_type = request.GET.get('product_type')
+    if search:
+        produtos = Product.objects.filter(nome__icontains=search)
+    elif product_type:
+        produtos = Product.objects.filter(product_type=product_type)
+    else:
+        produtos = Product.objects.all()
     return render(request, 'store.html', {'produtos': produtos, 'usuario': request.user})
 
 @login_required
@@ -187,4 +189,4 @@ def finalizar_carrinho(request):
 def order_list(request):
     if request.user.user_type == 'vendedor':
         lista = Order.objects.all()
-        return render(request, 'lista_pedidos.html', {'order': lista})
+        return render(request, 'list.html', {'pedidos': lista, 'usuario': request.user})

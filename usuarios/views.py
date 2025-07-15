@@ -110,7 +110,7 @@ def edit_user(request):
 def lista_clientes(request):
     if request.user.user_type == 'vendedor':
         lista = User.objects.filter(user_type='cliente')
-        return render(request, 'lista_cliente.html', {'user': lista, 'usuario': request.user})
+        return render(request, 'list.html', {'clientes': lista, 'usuario': request.user})
     else:
         return HttpResponse('URL indisponível')
 
