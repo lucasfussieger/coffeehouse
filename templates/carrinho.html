@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +28,7 @@
         {% for i in itens %}
         
            <p class="iten">
-                <img src="{% url 'static', filename='uploads/' ~ i.image %}" alt="Imagem do produto"> {{i.product_name}}-{{i.product_price}}-{{i.quantity}}
+                <img src="{{ i.image }}" alt="Imagem do produto"> {{i.product_name}}-{{i.product_price}}-{{i.quantity}}
            </p>  
                 
         {% endfor %}

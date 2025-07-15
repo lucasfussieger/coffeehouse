@@ -6,7 +6,7 @@ class Product(models.Model):
     preco = models.CharField(max_length=100)
     descricao = models.CharField(max_length=200, blank=True, null=True)
     product_type = models.CharField(max_length=100)
-    image = models.CharField(max_length=255, blank=True, null=True)
+    image = models.ImageField(upload_to = 'produtos/')
 
     def __str__(self):
         return self.nome

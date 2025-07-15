@@ -14,7 +14,8 @@
     
     <main>
         {% for c in user %}
-            <a href="{%url 'cliente_details' c.id %}" class="iten">{{ c.nome }}-{{c.id}}-{{  c.email }} </a>  <br>
+            <p>{{ c.nome }}-{{c.id}}-{{  c.email }}</p>
+            <br>
         {% endfor %}
     </main>
 </body>

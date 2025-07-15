@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import User  # seu modelo
+from .models import User 
 from django.contrib.auth.hashers import make_password
 
 #/product_details/<int:product_id>
@@ -14,9 +14,6 @@ from django.contrib.auth.hashers import make_password
 #/pedidos
 #/pedido/<int:pedido_id>/aprovar
 #/store/produtos/<string:product_type>
-
-##
-
 
 def home(request):
     if request.user.is_authenticated:
@@ -76,7 +73,8 @@ def cadastrar(request):
 
 @login_required
 def profile_page(request):
-    return render(request, 'profile_page.html')
+    usuario = request.user
+    return render(request, 'profile_page.html', {'usuario': usuario})
 
 @login_required
 def deletar_conta(request):
@@ -119,7 +117,4 @@ def lista_clientes(request):
 @login_required
 def cliente_details(request, cliente_id):
     usuario = get_object_or_404(User, id = cliente_id)
-    return render(request, 'cliente_details.html', {
-        'user': usuario,
-        'usuario': request.user
-    })
+    return render(request, 'cliente_details.html', {'user': usuario, 'usuario': request.user})
