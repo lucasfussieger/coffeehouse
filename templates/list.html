@@ -11,15 +11,22 @@
 </head>
 <body>
     {% include 'partials/header.html'%}
+    
     <main>
-        {% for pedido in pedidos %}
-            <div>
-                <a href="{% url 'ver_pedido' pedido.id %}" class="iten">
-                    Usuário: {{pedido.user_id}} - Pedido #{{ pedido.id }} - Status: {{ pedido.status }}
-                </a>
-            </div>
-        {% endfor %}
+        {% if clientes %}
+            {% for c in clientes %}
+                <p>{{ c.nome }}-{{c.id}}-{{  c.email }}</p>
+                <br>
+            {% endfor %}
+        {% elif pedidos %}
+            <h2>Lista de Pedidos</h2>
+            <ul>
+                {% for pedido in pedidos %}
+                     <li>Pedido #{{ pedido.id }} - {{ pedido.status }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
     </main>
-
 </body>
 </html>

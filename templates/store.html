@@ -12,6 +12,10 @@
     {% include 'partials/header.html' %}
    
     <main>
+        <form method="GET" action="{% url 'store' %}">
+            <input type="search" name="search" placeholder="Pesquisar...">
+            <button type="submit">Buscar</button>
+        </form>
         <div class="flashes">
             {% if messages %}
                 <ul>
